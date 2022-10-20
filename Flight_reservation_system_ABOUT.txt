@@ -1,0 +1,81 @@
+                                                 The Flight Reservation System
+
+1. How to use
+
+	The system has 2 modes of access: Admin and User. Both modes allow you to search for flights for a specified route taken as input. 
+	Both admins and users have unique login ids along with a password.
+	
+	The Admin can add new flights/remove existing flights/modify flight details. 
+	
+	The User can Book tickets by specifying the route and the date.
+	
+	The sign-up page can set up new user accounts which are ready to use.
+	
+	1.1 Admin actions
+		
+		When an admin adds a new flight, they are asked to input all the flight details after which the flight is added to the database. 
+		This flight is then accessible to all users and admins for viewing/booking.
+		
+		When an admin removes a flight, the flight is removed from the database and is no longer accssible to anyone. Any past booking of 
+		this flight is flagged in the booking database as cancelled(Note it is not removed but flagged). If the user tries to view previously
+		booked tickets to this cancelled flight, they are updated about the cancellation.
+		
+		The admin can only modify the pricing and arrival/departure times of a flight. If they have to edit the airline/flight number, they
+		will have to remove the flight and add a new one, as editing these details amounts to making a new flight itself. These modifications
+		will be visible to all during viewing/booking flights.
+		
+	1.2 User Actions
+		
+		The User can view flights by specifying the desired source and destination and can choose to proceed to booking the flight or return to
+		the menu. 
+		
+		The user can book flights by specifying the route and date(the year has to be greater than 2021), and then selecting the flight number
+		from the available flights displayed on screen. The user will then have to choose between economy/business seats following which they 
+		will have to enter the number of infants,children and adults specifically. The system will then ask passenger details for every individual
+		which includes name, gender and age. This concludes the booking and the user can choose to display the detailed bill or return to the 
+		menu.
+		
+		The user can also chose to view their booked tickets. The system will display the booking reference codes of all the bookings made by 
+		the user and the user has to input the reference code of the booking of which the ticket has to be displayed. After the ticket is 
+		displayed, the user can return to the menu.
+
+2. Documents used
+
+	2.1 flightdata.txt
+		
+		This file stores the details of all flights. The format is as follows:
+		
+		Source Destination Airline Flight_number Departure_time Arrival_time Economy_price Business_price
+		
+		All flights are daily flights. The Economy_price and Business_price are the ticket costs for an adult seat in economy class and business
+		class respectively. The ticket price of a seat for a child is 75% that of the adult seat and 50% of the adult seat for an infant.
+		
+		flightdatatemp.txt is an internal file used as a buffer file during file modification.
+		
+	2.2 bookings.txt
+	
+		This file records the details of all the bookings made by all users. The format is as follows:
+		Flight_number Date Class Username Passenger_type Passenger_name Passenger_gender Passenger_age Booking_reference_code
+		
+		This stores the booking of every passenger. In case the admin cancels a particular flight, the format of the tickets that are affected is
+		as follows:
+		
+		*Flight_number Date Class Username Passenger_type Passenger_name Passenger_gender Passenger_age Booking_reference_code
+		
+		The '*' in the beginning flags the booking as a cancelled flight. 
+		
+		bookingbackup.txt is an internal file used as a buffer file during file modification.
+		
+	2.3 User_data.txt
+	
+		This file stores the details of all users. The format is as follows:
+		
+		username password Name contact_number gender
+		
+		User_datatemp.txt is an internal file used as a buffer file during file modification.
+		
+	2.4 Admin_data.txt
+	
+		This file stores the details of all admin accounts. The format is as follows:
+		
+		username password Name contact_number gender
